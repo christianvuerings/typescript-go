@@ -1,0 +1,18 @@
+/index.cjs(2,1): error TS4082: Default export of the module has or is using private name 'Private'.
+
+
+==== /node_modules/@types/pkg/index.d.ts (0 errors) ====
+    interface Private {
+        value: string;
+    }
+    declare const pkg: Private;
+    export = pkg;
+    
+==== /index.cjs (1 errors) ====
+    /** @type {typeof import("pkg") | undefined} */
+    let pkg;
+    ~~~
+!!! error TS4082: Default export of the module has or is using private name 'Private'.
+    
+    module.exports = { pkg };
+    

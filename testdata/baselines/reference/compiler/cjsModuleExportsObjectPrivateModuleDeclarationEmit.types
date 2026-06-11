@@ -1,0 +1,26 @@
+//// [tests/cases/compiler/cjsModuleExportsObjectPrivateModuleDeclarationEmit.ts] ////
+
+=== /node_modules/@types/pkg/index.d.ts ===
+interface Private {
+    value: string;
+>value : string
+}
+declare const pkg: Private;
+>pkg : Private
+
+export = pkg;
+>pkg : Private
+
+=== /index.cjs ===
+/** @type {typeof import("pkg") | undefined} */
+let pkg;
+>pkg : Private | undefined
+
+module.exports = { pkg };
+>module.exports = { pkg } : { pkg: Private | undefined; }
+>module.exports : { pkg: Private | undefined; }
+>module : { exports: { pkg: Private | undefined; }; }
+>exports : { pkg: Private | undefined; }
+>{ pkg } : { pkg: Private | undefined; }
+>pkg : Private | undefined
+
