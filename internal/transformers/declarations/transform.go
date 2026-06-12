@@ -1112,10 +1112,7 @@ func (tx *DeclarationTransformer) transformExportAssignment(input *ast.Node, ass
 		initializer = tx.resolver.CreateLiteralConstValue(tx.EmitContext(), tx.EmitContext().ParseNode(assignment), tx.tracker)
 	}
 	if initializer == nil {
-		oldSuppressNewDiagnosticContexts := tx.suppressNewDiagnosticContexts
-		tx.suppressNewDiagnosticContexts = true
 		type_ = tx.ensureType(assignment, false)
-		tx.suppressNewDiagnosticContexts = oldSuppressNewDiagnosticContexts
 	}
 	varDecl := tx.Factory().NewVariableDeclaration(newId, nil, type_, initializer)
 	tx.tracker.PopErrorFallbackNode()
